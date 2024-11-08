@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+</head>
+<body>
+    <h1>Menu</h1>
+    <ul>
+        {% for item, details in menu.items() %}
+            <li>
+                <strong>{{ item }} - ${{ details.price }}</strong><br>
+                <img src="{{ details.image }}" alt="{{ item }}" width="150" height="120"><br>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Buy an Item</h2>
+    <form action="{{ url_for('buy') }}" method="post">
+        <label for="item">Select Item:</label>
+        <select name="item" id="item">
+            {% for item in menu.keys() %}
+                <option value="{{ item }}">{{ item }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Buy</button>
+    </form>
+</body>
+</html>
